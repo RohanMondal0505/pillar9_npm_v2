@@ -1,25 +1,37 @@
 # Demo variables
 
 ```
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDA3ZjQxYmM4YzIxZmY3MDFiYTNiYiIsImV4cCI6MTc2OTE1MzgxMiwiaWF0IjoxNzM3NjE3ODEyfQ.S9yHmZD0q9JLANRoQ1fQN0qWtffHTXCr7oyC20bFzDw";
 const user = {
-	profilePic:
-		"https://firebasestorage.googleapis.com/v0/b/file-upload-demo-213de.appspot.com/o/defaultAvatar.jpg?alt=media&token=56f59056-fc87-47cb-9f42-98f8406f892a",
-	_id: "67407f41bc8c21ff701ba3bb",
-	name: "Test User",
-	email: "user@gmail.com",
-	password: "$2a$08$KpFEw.oUYKvZp/v8Rr0HNeQv/QujkWpLHDKQcFZSvw1RK4fuNIWe.",
-	isActive: true,
-	isDeleted: false,
-	createdAt: "2024-11-22T12:55:29.345Z",
-	updatedAt: "2024-11-22T13:05:38.716Z",
-	__v: 0,
-	userName: "user191283",
-};
+		_id: "6746dafcdcaf297ede0d9724",
+		name: "New User",
+		userName: "new3627",
+		email: "new@gmail.com",
+		profilePic:
+			"https://firebasestorage.googleapis.com/v0/b/princecollege-b5027.appspot.com/o/Pilar9%2FUsers%20Profile%2FBeautiful%20blonde%20in%20black%20with%20hat%20on%20her%20had.png.png?alt=media&token=19824029-541f-48c1-b050-eef7366bcfb0",
+		password: "$2a$08$OksjnFGV3YQC2q6UdS.cmercOTmybHL5laXRii4mqMjrAx9zTV9BG",
+		isActive: true,
+		isDeleted: false,
+		createdAt: "2024-11-27T08:40:28.933Z",
+		updatedAt: "2024-11-27T08:40:28.933Z",
+		__v: 0,
+	};
+	const token =
+		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDZkYWZjZGNhZjI5N2VkZTBkOTcyNCIsImV4cCI6MTc2OTU3NzAyNCwiaWF0IjoxNzM4MDQxMDI0fQ.4VYJ1IvfsMWqzX9f46F0wnEZlTDkyelC6ts6BoPX05c";
 
-const X_API_KEY = "tOKMV0hOEK3B8vrsjVk9B2TWpRgOKTyT2f7C6qT0";
-const API_BASE_URL = "https://pilar9-backend.vercel.app";
+	const X_API_KEY = "tOKMV0hOEK3B8vrsjVk9B2TWpRgOKTyT2f7C6qT0";
+	const API_BASE_URL = "https://pilar9-backend.vercel.app";
+
+	//dashboard
+	const defaultLayout = [
+		{ i: "box1", x: 0, y: 0, w: 12, h: 8, isDraggable: true, isResizable: true },
+		{ i: "box2", x: 0, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
+		{ i: "box3", x: 6, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
+		{ i: "box4", x: 0, y: 16, w: 8, h: 8, isDraggable: true, isResizable: true },
+		{ i: "box5", x: 8, y: 16, w: 4, h: 8, isDraggable: true, isResizable: true },
+	];
+	const widgetButtons = ["ListAgent", "Dimensions", "Segments", "Time", "Filter"];
+	const userId = "6746dafcdcaf297ede0d9724";
+	const padding = "2rem";
 ```
 
 ```
@@ -36,12 +48,22 @@ ls.set("API_BASE_URL", API_BASE_URL);
 # Import like this & use
 
 ```
-import { App } from "piller9_npm_user";
+import { App } from "pillar9_npm_user";
 
 const Component = () => {
 
 	return (
-		<App token={token} user={user} X_API_KEY={X_API_KEY} API_BASE_URL={API_BASE_URL} />
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"Dashboard"}
+				defaultLayout={defaultLayout}
+				widgetButtons={widgetButtons}
+				userId={userId}
+				padding={padding}
+			/>
 	);
 };
 
