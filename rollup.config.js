@@ -15,7 +15,7 @@ export default defineConfig({
 		{
 			dir: "dist",
 			format: "es",
-			name: "piller9_npm_user",
+			name: "pillar9_user_package",
 			sourcemap: true,
 		},
 	],
@@ -50,11 +50,9 @@ export default defineConfig({
 	external: [
 		"react",
 		"react-dom",
-		"react-router-dom",
 		"react-toastify",
 		"localstorage-slim",
 		"axios",
-		"react-redux",
 		"react-toastify",
 	],
 });
