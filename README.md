@@ -48,7 +48,7 @@ ls.set("API_BASE_URL", API_BASE_URL);
 # Import like this & use
 
 ```
-import { App } from "pillar9_npm_user";
+import { App } from "pillar9_user_package";
 
 const Component = () => {
 
@@ -71,13 +71,12 @@ export default Component;
 
 ```
 
-# Use this dependencies & devDependencies in your react vite code 
+# Use this dependencies & devDependencies in your react vite code
+
 ```
 "dependencies": {
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-router-dom": "^6.24.0",
-		"@reduxjs/toolkit": "^2.2.6",
 		"@vitejs/plugin-react-swc": "^3.7.1",
 		"axios": "^1.7.8",
 		"html2canvas": "^1.4.1",
@@ -88,11 +87,9 @@ export default Component;
 		"react-grid-layout": "^1.5.0",
 		"react-icons": "^5.3.0",
 		"react-loader-spinner": "^6.1.6",
-		"react-redux": "^9.1.2",
 		"react-toastify": "^10.0.5",
 		"sass": "^1.77.6",
-		"sweetalert2": "^11.14.5",
-		"vite-plugin-svgr": "^4.3.0"
+		"sweetalert2": "^11.14.5"
 	},
 	"devDependencies": {
 		"@types/react": "^18.3.3",
