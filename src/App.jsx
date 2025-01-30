@@ -7,6 +7,7 @@ import LoadingIndicator from "./components/LoadingIndicator/LoadingIndicator.jsx
 import FullScreenPopup from "./pages/MultiDashboard/FullScreenPopup.jsx";
 import MultiDashboard from "./pages/MultiDashboard/MultiDashboard.jsx";
 import RequestWidget from "./pages/RequestWidget/RequestWidget.jsx";
+import { ToastContainer } from "react-toastify";
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard.jsx"));
 
@@ -18,7 +19,6 @@ const App = ({
 	type = "Dashboard",
 	defaultLayout,
 	widgetButtons,
-	userId,
 	padding,
 	agentIdType,
 	defaultFields,
@@ -43,57 +43,51 @@ const App = ({
 	if (token)
 		return (
 			<>
-				{type === "Dashboard" && (
-					<div className={styles.Wrapper}>
-						{isLoadingPopup && <LoadingPopup />}
-						{isFullScreen && <FullScreenPopup {...{ isFullScreen, setIsFullScreen }} />}
-						<Suspense fallback={<LoadingIndicator />}>
-							<div className={styles.MainWrapper}>
+				<ToastContainer
+					position="top-center"
+					autoClose={3000}
+					limit={4}
+					hideProgressBar={false}
+					newestOnTop={false}
+					rtl={false}
+					pauseOnFocusLoss={false}
+					draggable={false}
+					pauseOnHover
+				/>
+				<div className={styles.Wrapper}>
+					{isLoadingPopup && <LoadingPopup />}
+					{isFullScreen && <FullScreenPopup {...{ isFullScreen, setIsFullScreen }} />}
+					<Suspense fallback={<LoadingIndicator />}>
+						<div className={styles.MainWrapper}>
+							{type === "Dashboard" && (
 								<Dashboard
 									{...{
 										defaultLayout,
 										widgetButtons,
-										userId,
+										userId: user._id,
 										setIsLoadingPopup,
 										setIsFullScreen,
 										padding,
 									}}
 								/>
-							</div>
-						</Suspense>
-					</div>
-				)}
-				{type === "RequestWidget" && (
-					<div className={styles.Wrapper}>
-						{isLoadingPopup && <LoadingPopup />}
+							)}
 
-						<Suspense fallback={<LoadingIndicator />}>
-							<div className={styles.MainWrapper}>
-								<RequestWidget {...{ setIsLoadingPopup, email: user.email }} />
-							</div>
-						</Suspense>
-					</div>
-				)}
-				{type === "MultiDashboard" && (
-					<div className={styles.Wrapper}>
-						{isLoadingPopup && <LoadingPopup />}
-
-						<Suspense fallback={<LoadingIndicator />}>
-							<div className={styles.MainWrapper}>
+							{type === "RequestWidget" && <RequestWidget {...{ setIsLoadingPopup, email: user.email }} />}
+							{type === "MultiDashboard" && (
 								<MultiDashboard
 									{...{
 										setIsLoadingPopup,
 										padding,
-										userId,
+										userId: user._id,
 										defaultLayout,
 										widgetButtons,
 										setIsFullScreen,
 									}}
 								/>
-							</div>
-						</Suspense>
-					</div>
-				)}
+							)}
+						</div>
+					</Suspense>
+				</div>
 			</>
 		);
 };

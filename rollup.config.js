@@ -51,8 +51,5 @@ export default defineConfig({
 		"react",
 		"react-dom",
 		"react-toastify",
-		"localstorage-slim",
-		"axios",
-		"react-toastify",
 	],
 });

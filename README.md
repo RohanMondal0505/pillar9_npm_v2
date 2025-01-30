@@ -30,31 +30,19 @@ const user = {
 		{ i: "box5", x: 8, y: 16, w: 4, h: 8, isDraggable: true, isResizable: true },
 	];
 	const widgetButtons = ["ListAgent", "Dimensions", "Segments", "Time", "Filter"];
-	const userId = "6746dafcdcaf297ede0d9724";
 	const padding = "2rem";
 
+    //data table (list agent)
 	const agentIdType = "RMAWANIR";
     const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
 ```
 
-```
-import ls from "localstorage-slim"; // import this
-
-<!--  login time set this value -->
-ls.set("Pilar9_Token_npm_ls", token);
-ls.set("Pillar9_user_npm_ls", user);
-ls.set("X_API_KEY", X_API_KEY);
-ls.set("API_BASE_URL", API_BASE_URL);
-
-```
-
-# Import like this & use
+# Import like this & use for dashboard
 
 ```
 import { App } from "pillar9_user_package";
 
 const Component = () => {
-
 	return (
 			<App
 				token={token}
@@ -64,7 +52,54 @@ const Component = () => {
 				type={"Dashboard"}
 				defaultLayout={defaultLayout}
 				widgetButtons={widgetButtons}
-				userId={userId}
+				padding={padding}
+			/>
+	);
+};
+
+export default Component;
+
+```
+
+# Import like this & use for Multi Dashboard
+
+```
+import { App } from "pillar9_user_package";
+
+const Component = () => {
+	return (
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"MultiDashboard"}
+				defaultLayout={defaultLayout}
+				widgetButtons={widgetButtons}
+				padding={padding}
+				agentIdType={agentIdType}
+				defaultFields={defaultFields}
+			/>
+	);
+};
+
+export default Component;
+
+```
+
+# Import like this & use for Widget Requests
+
+```
+import { App } from "pillar9_user_package";
+
+const Component = () => {
+	return (
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"RequestWidget"}
 				padding={padding}
 			/>
 	);
@@ -80,12 +115,9 @@ export default Component;
 "dependencies": {
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"@vitejs/plugin-react-swc": "^3.7.1",
-		"axios": "^1.7.8",
 		"html2canvas": "^1.4.1",
 		"jspdf": "^2.5.2",
 		"jspdf-autotable": "^3.8.4",
-		"localstorage-slim": "^2.7.1",
 		"react-csv": "^2.2.2",
 		"react-grid-layout": "^1.5.0",
 		"react-icons": "^5.3.0",
@@ -94,14 +126,5 @@ export default Component;
 		"sass": "^1.77.6",
 		"sweetalert2": "^11.14.5"
 	},
-	"devDependencies": {
-		"@types/react": "^18.3.3",
-		"@types/react-dom": "^18.3.0",
-		"@vitejs/plugin-react": "^4.3.1",
-		"eslint": "^8.57.0",
-		"eslint-plugin-react": "^7.34.2",
-		"eslint-plugin-react-hooks": "^4.6.2",
-		"eslint-plugin-react-refresh": "^0.4.7",
-		"vite": "^5.3.1"
-	}
+
 ```
