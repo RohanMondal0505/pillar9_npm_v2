@@ -32,6 +32,9 @@ const user = {
 	const widgetButtons = ["ListAgent", "Dimensions", "Segments", "Time", "Filter"];
 	const userId = "6746dafcdcaf297ede0d9724";
 	const padding = "2rem";
+
+	const agentIdType = "RMAWANIR";
+    const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
 ```
 
 ```

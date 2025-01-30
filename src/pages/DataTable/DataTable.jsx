@@ -1,5 +1,3 @@
-import axios from "axios";
-import ls from "localstorage-slim";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
@@ -8,12 +6,12 @@ import { MdRefresh } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading/Loading";
+import { formatTimestamp } from "../../components/utils/HelperFunctions";
 import styles from "./DataTable.module.scss";
 import "./DataTable.scss";
 import DownloadPopup from "./DownloadPopup";
-import { formatTimestamp } from "../../components/utils/HelperFunctions";
 
-const DataTable = ({ id = "RMAWANIR", pagination }) => {
+const DataTable = () => {
 	const [listings, setListings] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -23,36 +21,49 @@ const DataTable = ({ id = "RMAWANIR", pagination }) => {
 	const [reload, setReload] = useState(0);
 	const rowsPerPage = 10;
 
-	const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
-
+	const apiKey = localStorage.getItem("X_API_KEY");
+	const agentIdType = localStorage.getItem("agentIdType");
+	const defaultFields = JSON.parse(localStorage.getItem("defaultFields"));
 	const [selectedKeys, setSelectedKeys] = useState(defaultFields);
 	const [isSwitchedOn, setIsSwitchedOn] = useState(false);
 
 	useEffect(() => {
-		const fetchListings = () => {
+		const fetchListings = async () => {
 			setLoading(true);
-			axios
-				.get(`https://paz9f27r6h.execute-api.ca-central-1.amazonaws.com/staging/agent/${id}/myListings`, {
-					headers: {
-						"X-API-KEY": ls.get("X_API_KEY"),
-					},
-				})
-				.then(({ data }) => {
-					setListings(data);
-					setFilteredData(data);
-				})
-				.catch((err) => {
-					toast.error("Error loading list agent data ..");
-				})
-				.finally(() => setLoading(false));
+
+			try {
+				const response = await fetch(
+					`https://paz9f27r6h.execute-api.ca-central-1.amazonaws.com/staging/agent/${agentIdType}/myListings`,
+					{
+						method: "GET",
+						headers: {
+							"X-API-KEY": apiKey,
+						},
+					}
+				);
+
+				if (!response.ok) {
+					throw new Error("Error loading list agent data ..");
+				}
+
+				const data = await response.json();
+				setListings(data);
+				setFilteredData(data);
+			} catch (error) {
+				toast.error(error.message);
+			} finally {
+				setLoading(false);
+			}
 		};
 
 		fetchListings();
-	}, [id, reload]);
+	}, [agentIdType, reload]);
 
 	// Filter listings based on search query
 	useEffect(() => {
-		const filtered = listings?.filter((row) => selectedKeys.some((key) => row[key]?.toString().toLowerCase().includes(search.toLowerCase())));
+		const filtered = listings?.filter((row) =>
+			selectedKeys.some((key) => row[key]?.toString().toLowerCase().includes(search.toLowerCase()))
+		);
 		setFilteredData(filtered);
 		setCurrentPage(1);
 	}, [search, listings, selectedKeys]);
@@ -66,7 +77,9 @@ const DataTable = ({ id = "RMAWANIR", pagination }) => {
 
 	// Toggle a field in selected keys
 	const toggleField = (field) => {
-		setSelectedKeys((prevSelected) => (prevSelected.includes(field) ? prevSelected.filter((key) => key !== field) : [...prevSelected, field]));
+		setSelectedKeys((prevSelected) =>
+			prevSelected.includes(field) ? prevSelected.filter((key) => key !== field) : [...prevSelected, field]
+		);
 	};
 
 	const availableFields = Object.keys(listings[0] || {});
@@ -80,7 +93,7 @@ const DataTable = ({ id = "RMAWANIR", pagination }) => {
 		<>
 			{openDownloadPopup && <DownloadPopup {...{ setOpenDownloadPopup, data: listings, selectedKeys }} />}
 
-			<div className={`${styles.container} ${pagination === "hide" ? styles.AutoHeight : ""}`}>
+			<div className={`${styles.container} `}>
 				<div className={styles.SelectField}>
 					<select onChange={(e) => toggleField(e.target.value)}>
 						<option value="">Manage Fields</option>
@@ -91,11 +104,9 @@ const DataTable = ({ id = "RMAWANIR", pagination }) => {
 						))}
 					</select>
 
-					{pagination !== "hide" && (
-						<button className={styles.Actions}>
-							<BsThreeDotsVertical size={"1.2rem"} onClick={() => setOpenDownloadPopup(true)} />
-						</button>
-					)}
+					<button className={styles.Actions}>
+						<BsThreeDotsVertical size={"1.2rem"} onClick={() => setOpenDownloadPopup(true)} />
+					</button>
 				</div>
 
 				<div className={styles.KeysToShow}>
@@ -176,20 +187,21 @@ const DataTable = ({ id = "RMAWANIR", pagination }) => {
 						<div
 							className={styles.Arrow}
 							onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
-							style={{ marginRight: "1rem" }}
-						>
+							style={{ marginRight: "1rem" }}>
 							<FaArrowLeft color="#e6d366" size={"1.2rem"} />
 						</div>
 						{[...Array(Math.ceil(filteredData.length / rowsPerPage)).keys()].map((page) => (
-							<button key={page} className={currentPage === page + 1 ? styles.activePage : ""} onClick={() => setCurrentPage(page + 1)}>
+							<button
+								key={page}
+								className={currentPage === page + 1 ? styles.activePage : ""}
+								onClick={() => setCurrentPage(page + 1)}>
 								{page + 1}
 							</button>
 						))}
 						<div
 							className={styles.Arrow}
 							onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.ceil(filteredData.length / rowsPerPage)))}
-							style={{ marginLeft: "1rem" }}
-						>
+							style={{ marginLeft: "1rem" }}>
 							<FaArrowRight color="#e6d366" size={"1.2rem"} />
 						</div>
 					</div>

@@ -4,7 +4,6 @@ import GridLayout from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import { toast } from "react-toastify";
 import { CrossButton, PlusButton } from "../../assets/svg/SvgIndex";
-import axios from "../../components/Hooks/axios";
 import styles from "./Dashboard.module.scss";
 import Widgets from "./Widgets";
 
@@ -14,6 +13,9 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 	const [showUpdateButton, setShowUpdateButton] = useState(false); //for show save layout button
 	const [reload, setReload] = useState(0);
 	const [loading, setLoading] = useState(true);
+
+	const token = localStorage.getItem("Pilar9_Token_npm_ls");
+	const baseUrl = localStorage.getItem("API_BASE_URL");
 
 	const dashboardRef = useRef(null);
 
@@ -86,16 +88,30 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 	useEffect(() => {
 		setLoading(true);
 		setIsLoadingPopup(true);
-		axios
-			.get(`/main-dashboard?userId=${userId}`)
-			.then(({ data }) => {
+
+		fetch(`${baseUrl}/api/main-dashboard?userId=${userId}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		})
+			.then((res) => {
+				if (!res.ok) {
+					return res.json().then((err) => {
+						throw new Error(err?.message || "Error getting layout..");
+					});
+				}
+				return res.json();
+			})
+			.then((data) => {
 				setDashboardData(data?.data);
 				setBackupDashboardData(data?.data);
 				setSelectedWidgets(data?.data?.widgets);
 				setLayout(data?.data?.layout);
 			})
 			.catch((err) => {
-				toast.error(err?.response?.data?.message || "Error getting layout..");
+				toast.error(err.message);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -109,18 +125,35 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 	const handleSaveLayout = () => {
 		setUpdatingLayout(true);
 		setIsLoadingPopup(true);
-		axios
-			.post(`/main-dashboard/create?userId=${userId}`, {
+
+		const token = localStorage.getItem("token");
+
+		fetch(`${baseUrl}/api/main-dashboard/create?userId=${userId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
 				widgets: dashboardData?.widgets,
 				layout: dashboardData?.layout,
+			}),
+		})
+			.then((res) => {
+				if (!res.ok) {
+					return res.json().then((err) => {
+						throw new Error(err?.message || "Error Updating Dashboard layout..");
+					});
+				}
+				return res.json();
 			})
-			.then(({ data }) => {
+			.then((data) => {
 				toast.success(data?.message || "Updated Successfully...");
 				setReload(Math.random());
 				setEditable(false);
 			})
 			.catch((err) => {
-				toast.error(err?.response?.data?.message || "Error Updating Dashboard layout..");
+				toast.error(err.message);
 			})
 			.finally(() => {
 				setUpdatingLayout(false);
@@ -234,8 +267,7 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 									rowHeight={40}
 									width={gridWidth}
 									draggableHandle=".dragHandle"
-									onLayoutChange={handleLayoutChange}
-								>
+									onLayoutChange={handleLayoutChange}>
 									{dashboardData?.widgets?.map((widget, i) => (
 										<div
 											key={`box${i + 1}`}
@@ -245,8 +277,7 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 												isDraggable: layout[i]?.isDraggable ?? true, // Default to true
 												isResizable: layout[i]?.isResizable ?? true, // Default to true
 												static: !layout[i]?.isDraggable && !layout[i]?.isResizable,
-											}}
-										>
+											}}>
 											<Widgets
 												item={widget}
 												index={i}
