@@ -4,7 +4,8 @@ import styles from "./assets/scss/Styles.module.scss";
 import "./assets/scss/index.scss";
 import LoadingPopup from "./components/Loading/LoadingPopup.jsx";
 import LoadingIndicator from "./components/LoadingIndicator/LoadingIndicator.jsx";
-import FullScreenPopup from "./pages/DynamicDashboard/FullScreenPopup.jsx";
+import FullScreenPopup from "./pages/MultiDashboard/FullScreenPopup.jsx";
+import MultiDashboard from "./pages/MultiDashboard/MultiDashboard.jsx";
 import RequestWidget from "./pages/RequestWidget/RequestWidget.jsx";
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard.jsx"));
@@ -69,6 +70,26 @@ const App = ({
 						<Suspense fallback={<LoadingIndicator />}>
 							<div className={styles.MainWrapper}>
 								<RequestWidget {...{ setIsLoadingPopup, email: user.email }} />
+							</div>
+						</Suspense>
+					</div>
+				)}
+				{type === "MultiDashboard" && (
+					<div className={styles.Wrapper}>
+						{isLoadingPopup && <LoadingPopup />}
+
+						<Suspense fallback={<LoadingIndicator />}>
+							<div className={styles.MainWrapper}>
+								<MultiDashboard
+									{...{
+										setIsLoadingPopup,
+										padding,
+										userId,
+										defaultLayout,
+										widgetButtons,
+										setIsFullScreen,
+									}}
+								/>
 							</div>
 						</Suspense>
 					</div>
