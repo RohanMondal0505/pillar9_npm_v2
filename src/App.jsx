@@ -5,6 +5,7 @@ import "./assets/scss/index.scss";
 import LoadingPopup from "./components/Loading/LoadingPopup.jsx";
 import LoadingIndicator from "./components/LoadingIndicator/LoadingIndicator.jsx";
 import FullScreenPopup from "./pages/DynamicDashboard/FullScreenPopup.jsx";
+import RequestWidget from "./pages/RequestWidget/RequestWidget.jsx";
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard.jsx"));
 
@@ -57,6 +58,17 @@ const App = ({
 										padding,
 									}}
 								/>
+							</div>
+						</Suspense>
+					</div>
+				)}
+				{type === "RequestWidget" && (
+					<div className={styles.Wrapper}>
+						{isLoadingPopup && <LoadingPopup />}
+
+						<Suspense fallback={<LoadingIndicator />}>
+							<div className={styles.MainWrapper}>
+								<RequestWidget {...{ setIsLoadingPopup, email: user.email }} />
 							</div>
 						</Suspense>
 					</div>
