@@ -57,7 +57,6 @@ const Widgets = ({ item, index, onWidgetStateChange, setIsFullScreen }) => {
 					<span className={styles.Menu}>
 						<BsThreeDotsVertical onClick={(e) => toggleMenu(e)} />
 
-						{/* Custom dropdown menu */}
 						{openLockMenu && (
 							<ul className={styles.CustomMenu}>
 								{isLocked ? (

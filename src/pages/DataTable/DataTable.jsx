@@ -50,6 +50,7 @@ const DataTable = () => {
 				setListings(data);
 				setFilteredData(data);
 			} catch (error) {
+				setError(err?.message);
 				toast.error(error.message);
 			} finally {
 				setLoading(false);

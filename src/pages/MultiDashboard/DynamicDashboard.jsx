@@ -24,7 +24,6 @@ const DynamicDashboard = ({
 	const [showUpdateButton, setShowUpdateButton] = useState(false); //for show save layout button
 
 	const [dashboardData, setDashboardData] = useState(openedDashboard);
-	//grid
 	const dashboardRef = useRef(null);
 
 	const [gridWidth, setGridWidth] = useState(window.innerWidth);

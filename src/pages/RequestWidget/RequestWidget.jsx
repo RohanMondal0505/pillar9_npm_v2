@@ -6,17 +6,14 @@ import { timeAgo } from "../../components/utils/HelperFunctions";
 import styles from "./RequestWidget.module.scss";
 
 const RequestWidget = ({ setIsLoadingPopup, email }) => {
+	const token = localStorage.getItem("Pilar9_Token_npm_ls");
+	const baseUrl = localStorage.getItem("API_BASE_URL");
 	const [widgetType, setWidgetType] = useState("");
 	const [message, setMessage] = useState("");
 	const [requests, setRequests] = useState([]);
 	// State to track expanded requests
 	const [expandedRequests, setExpandedRequests] = useState(Object.fromEntries(requests.map((_, index) => [index, false])));
 
-	// Get token from localStorage
-	const token = localStorage.getItem("Pilar9_Token_npm_ls");
-	const baseUrl = localStorage.getItem("API_BASE_URL");
-
-	// Handle form submission
 	const [uploading, setUploading] = useState(false);
 	const [reload, setReload] = useState(0);
 

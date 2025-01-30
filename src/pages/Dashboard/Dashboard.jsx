@@ -93,7 +93,7 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `${token}`,
 			},
 		})
 			.then((res) => {
@@ -132,7 +132,7 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `${token}`,
 			},
 			body: JSON.stringify({
 				widgets: dashboardData?.widgets,
@@ -230,8 +230,6 @@ const Dashboard = ({ defaultLayout, widgetButtons, userId, setIsLoadingPopup, se
 						)}
 					</div>
 				</div>
-
-				{/* Widget Buttons */}
 
 				{loading ? (
 					<></>
