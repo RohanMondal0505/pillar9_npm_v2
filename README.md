@@ -1,4 +1,199 @@
-# Demo variables
+
+# [Demo Website](https://pillar9-npm-demo.netlify.app/)
+
+## Custom Widget
+```bash
+//your custom components
+const CustomWidget1 = () => {
+	return (
+		<div>
+			<h1>Lorem ipsum dolor sit amet.</h1>
+			<h2>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsa
+				nihil labore.
+			</h2>
+			<button>Press Me</button>
+		</div>
+	);
+};
+const CustomWidget2 = () => {
+	return (
+		<div>
+			<button>Press Me</button>
+			<button>Click Me</button>
+			<button>Test</button>
+		</div>
+	);
+};
+const CustomWidget3 = () => {
+	return (
+		<div>
+			<h1>Lorem ipsum dolor sit amet.</h1>
+			<h2>widget 3</h2>
+			<button>Press Me</button>
+		</div>
+	);
+};
+const CustomWidget4 = () => {
+	return (
+		<div>
+			<button>Widget 4</button>
+			<button>Enter</button>
+		</div>
+	);
+};
+const CustomWidget5 = () => {
+	return (
+		<div>
+			<h2>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsa
+				nihil labore.
+			</h2>
+		</div>
+	);
+};
+
+const customWidget = {
+	widgets: [
+		{
+			name: "ListAgent",
+			isLocked: false,
+			isCollapsed: false,
+			show: true,
+			component: CustomWidget1,
+		},
+		{
+			name: "Dimensions",
+			isLocked: false,
+			isCollapsed: false,
+			show: true,
+			component: CustomWidget2,
+		},
+		{
+			name: "Segments",
+			isLocked: false,
+			isCollapsed: false,
+			show: true,
+			component: CustomWidget3,
+		},
+		{
+			name: "Time",
+			isLocked: false,
+			isCollapsed: false,
+			show: true,
+			component: CustomWidget4,
+		},
+		{
+			name: "Filter",
+			isLocked: false,
+			isCollapsed: false,
+			show: true,
+			component: CustomWidget5,
+		},
+	],
+	layout: [
+		{
+			i: "box1",
+			x: 0,
+			y: 0,
+			w: 12,
+			h: 13,
+			isDraggable: true,
+			isResizable: true,
+		},
+		{
+			i: "box2",
+			x: 0,
+			y: 13,
+			w: 6,
+			h: 8,
+			isDraggable: true,
+			isResizable: true,
+		},
+		{
+			i: "box3",
+			x: 6,
+			y: 13,
+			w: 6,
+			h: 8,
+			isDraggable: true,
+			isResizable: true,
+		},
+		{
+			i: "box4",
+			x: 0,
+			y: 21,
+			w: 6,
+			h: 8,
+			isDraggable: true,
+			isResizable: true,
+		},
+		{
+			i: "box5",
+			x: 6,
+			y: 21,
+			w: 6,
+			h: 8,
+			isDraggable: true,
+			isResizable: true,
+		},
+	],
+};
+
+const customStyle = {
+	title: {
+		color: "blue",
+	},
+	titleClass: "title",
+	cancelButton: {},
+	cancelButtonClass: "YourClassName",
+	saveButton: {},
+	saveButtonClass: "YourClassName",
+	manageButton: {},
+	manageButtonClass: "YourClassName",
+	dashboard: {
+		backgroundColor: "#fff",
+		padding: "2rem",
+	},
+	dashboardClass: "dashboardClass",
+	widgetTitle: {
+		fontSize: "1.2rem",
+		color: "#444",
+	},
+	widgetTitleClass: "WidgetClassName",
+	fullScreenStyle: {
+		backgroundColor: "#fff",
+	},
+	fullScreenClassName: "fullScreenClassName",
+};
+const title = "Your Custom Title";
+const handleSaveLayout = (data) => {
+	console.log(data);
+};
+```
+
+## Import like this & use for custom dashboard
+
+```bash
+import { App } from "pillar9_user_package";
+
+const Component = () => {
+	return (
+		<App
+			type={"CustomDashboard"}
+			customWidget={customWidget}
+			handleSaveLayout={handleSaveLayout}
+			title={title}
+			customStyle={customStyle}
+		/>
+	);
+};
+
+export default Component;
+```
+# -----------------------------------
+
+## Import like this & use for dashboard
 
 ```
 const user = {
@@ -15,218 +210,28 @@ const user = {
 		updatedAt: "2024-11-27T08:40:28.933Z",
 		__v: 0,
 	};
-	const token =
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDZkYWZjZGNhZjI5N2VkZTBkOTcyNCIsImV4cCI6MTc2OTU3NzAyNCwiaWF0IjoxNzM4MDQxMDI0fQ.4VYJ1IvfsMWqzX9f46F0wnEZlTDkyelC6ts6BoPX05c";
+const token =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDZkYWZjZGNhZjI5N2VkZTBkOTcyNCIsImV4cCI6MTc2OTU3NzAyNCwiaWF0IjoxNzM4MDQxMDI0fQ.4VYJ1IvfsMWqzX9f46F0wnEZlTDkyelC6ts6BoPX05c";
 
-	const X_API_KEY = "tOKMV0hOEK3B8vrsjVk9B2TWpRgOKTyT2f7C6qT0";
-	const API_BASE_URL = "https://pilar9-backend.vercel.app";
+const X_API_KEY = "tOKMV0hOEK3B8vrsjVk9B2TWpRgOKTyT2f7C6qT0";
+const API_BASE_URL = "https://pilar9-backend.vercel.app";
 
-	//dashboard
-	const defaultLayout = [
-		{ i: "box1", x: 0, y: 0, w: 12, h: 8, isDraggable: true, isResizable: true },
-		{ i: "box2", x: 0, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
-		{ i: "box3", x: 6, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
-		{ i: "box4", x: 0, y: 16, w: 8, h: 8, isDraggable: true, isResizable: true },
-		{ i: "box5", x: 8, y: 16, w: 4, h: 8, isDraggable: true, isResizable: true },
-	];
-	const widgetButtons = ["ListAgent", "Dimensions", "Segments", "Time", "Filter"];
-	const padding = "2rem";
+//dashboard
+const defaultLayout = [
+	{ i: "box1", x: 0, y: 0, w: 12, h: 8, isDraggable: true, isResizable: true },
+	{ i: "box2", x: 0, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
+	{ i: "box3", x: 6, y: 8, w: 6, h: 8, isDraggable: true, isResizable: true },
+	{ i: "box4", x: 0, y: 16, w: 8, h: 8, isDraggable: true, isResizable: true },
+	{ i: "box5", x: 8, y: 16, w: 4, h: 8, isDraggable: true, isResizable: true },
+];
+const widgetButtons = ["ListAgent", "Dimensions", "Segments", "Time", "Filter"];
+const padding = "2rem";
 
-    //data table (list agent)
-	const agentIdType = "RMAWANIR";
-    const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
-
-    //custom widget
-	//your custom components
-	const CustomWidget1 = () => {
-		return (
-			<div>
-				<h1>Lorem ipsum dolor sit amet.</h1>
-				<h2>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsa
-					nihil labore.
-				</h2>
-				<button>Press Me</button>
-			</div>
-		);
-	};
-	const CustomWidget2 = () => {
-		return (
-			<div>
-				<button>Press Me</button>
-				<button>Click Me</button>
-				<button>Test</button>
-			</div>
-		);
-	};
-	const CustomWidget3 = () => {
-		return (
-			<div>
-				<h1>Lorem ipsum dolor sit amet.</h1>
-				<h2>widget 3</h2>
-				<button>Press Me</button>
-			</div>
-		);
-	};
-	const CustomWidget4 = () => {
-		return (
-			<div>
-				<button>Widget 4</button>
-				<button>Enter</button>
-			</div>
-		);
-	};
-	const CustomWidget5 = () => {
-		return (
-			<div>
-				<h2>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsa
-					nihil labore.
-				</h2>
-			</div>
-		);
-	};
-
-	const customWidget = {
-		widgets: [
-			{
-				name: "ListAgent",
-				isLocked: false,
-				isCollapsed: false,
-				show: true,
-				component: CustomWidget1,
-			},
-			{
-				name: "Dimensions",
-				isLocked: false,
-				isCollapsed: false,
-				show: true,
-				component: CustomWidget2,
-			},
-			{
-				name: "Segments",
-				isLocked: false,
-				isCollapsed: false,
-				show: true,
-				component: CustomWidget3,
-			},
-			{
-				name: "Time",
-				isLocked: false,
-				isCollapsed: false,
-				show: true,
-				component: CustomWidget4,
-			},
-			{
-				name: "Filter",
-				isLocked: false,
-				isCollapsed: false,
-				show: true,
-				component: CustomWidget5,
-			},
-		],
-		layout: [
-			{
-				i: "box1",
-				x: 0,
-				y: 0,
-				w: 12,
-				h: 13,
-				isDraggable: true,
-				isResizable: true,
-			},
-			{
-				i: "box2",
-				x: 0,
-				y: 13,
-				w: 6,
-				h: 8,
-				isDraggable: true,
-				isResizable: true,
-			},
-			{
-				i: "box3",
-				x: 6,
-				y: 13,
-				w: 6,
-				h: 8,
-				isDraggable: true,
-				isResizable: true,
-			},
-			{
-				i: "box4",
-				x: 0,
-				y: 21,
-				w: 6,
-				h: 8,
-				isDraggable: true,
-				isResizable: true,
-			},
-			{
-				i: "box5",
-				x: 6,
-				y: 21,
-				w: 6,
-				h: 8,
-				isDraggable: true,
-				isResizable: true,
-			},
-		],
-	};
-
-	const customStyle = {
-		title: {
-			color: "blue",
-		},
-		titleClass: "title",
-		cancelButton: {},
-		cancelButtonClass: "YourClassName",
-		saveButton: {},
-		saveButtonClass: "YourClassName",
-		manageButton: {},
-		manageButtonClass: "YourClassName",
-		dashboard: {
-			backgroundColor: "#fff",
-			padding: "2rem",
-		},
-		dashboardClass: "dashboardClass",
-		widgetTitle: {
-			fontSize: "1.2rem",
-			color: "#444",
-		},
-		widgetTitleClass: "WidgetClassName",
-		fullScreenStyle: {
-			backgroundColor: "#fff",
-		},
-		fullScreenClassName: "fullScreenClassName",
-	};
-	const title = "Your Custom Title";
-	const handleSaveLayout = (data) => {
-		console.log(data);
-	};
-```
-
-
-# Import like this & use for custom dashboard
+//data table (list agent)
+const agentIdType = "RMAWANIR";
+const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
 
 ```
-import { App } from "pillar9_user_package";
-
-const Component = () => {
-	return (
-			<App
-				type={"CustomDashboard"}
-				customWidget={customWidget}
-				handleSaveLayout={handleSaveLayout}
-				title={title}
-				customStyle={customStyle}
-			/>
-	);
-};
-
-export default Component;
-
-# Import like this & use for dashboard
 
 ```
 import { App } from "pillar9_user_package";
@@ -250,7 +255,7 @@ export default Component;
 
 ```
 
-# Import like this & use for Multi Dashboard
+## Import like this & use for Multi Dashboard
 
 ```
 import { App } from "pillar9_user_package";
@@ -276,7 +281,7 @@ export default Component;
 
 ```
 
-# Import like this & use for Widget Requests
+## Import like this & use for Widget Requests
 
 ```
 import { App } from "pillar9_user_package";
@@ -298,7 +303,7 @@ export default Component;
 
 ```
 
-# Use this dependencies & devDependencies in your react vite code
+## Use this dependencies & devDependencies in your react vite code
 
 ```
 "dependencies": {
