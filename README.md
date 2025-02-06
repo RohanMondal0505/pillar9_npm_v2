@@ -37,8 +37,7 @@ const user = {
     const defaultFields = ["UniqueID", "StandardStatus", "PropertyType", "UnparsedAddress", "City", "ListAgentMlsId"];
 
     //custom widget
-
-	//component you wants to render
+	//your custom components
 	const CustomWidget1 = () => {
 		return (
 			<div>
@@ -207,6 +206,7 @@ const user = {
 	};
 ```
 
+
 # Import like this & use for custom dashboard
 
 ```
@@ -230,22 +230,21 @@ export default Component;
 # Import like this & use for dashboard
 
 ```
-
 import { App } from "pillar9_user_package";
 
 const Component = () => {
-return (
-<App
-token={token}
-user={user}
-X_API_KEY={X_API_KEY}
-API_BASE_URL={API_BASE_URL}
-type={"Dashboard"}
-defaultLayout={defaultLayout}
-widgetButtons={widgetButtons}
-padding={padding}
-/>
-);
+	return (
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"Dashboard"}
+				defaultLayout={defaultLayout}
+				widgetButtons={widgetButtons}
+				padding={padding}
+			/>
+	);
 };
 
 export default Component;
@@ -255,24 +254,23 @@ export default Component;
 # Import like this & use for Multi Dashboard
 
 ```
-
 import { App } from "pillar9_user_package";
 
 const Component = () => {
-return (
-<App
-token={token}
-user={user}
-X_API_KEY={X_API_KEY}
-API_BASE_URL={API_BASE_URL}
-type={"MultiDashboard"}
-defaultLayout={defaultLayout}
-widgetButtons={widgetButtons}
-padding={padding}
-agentIdType={agentIdType}
-defaultFields={defaultFields}
-/>
-);
+	return (
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"MultiDashboard"}
+				defaultLayout={defaultLayout}
+				widgetButtons={widgetButtons}
+				padding={padding}
+				agentIdType={agentIdType}
+				defaultFields={defaultFields}
+			/>
+	);
 };
 
 export default Component;
@@ -282,20 +280,19 @@ export default Component;
 # Import like this & use for Widget Requests
 
 ```
-
 import { App } from "pillar9_user_package";
 
 const Component = () => {
-return (
-<App
-token={token}
-user={user}
-X_API_KEY={X_API_KEY}
-API_BASE_URL={API_BASE_URL}
-type={"RequestWidget"}
-padding={padding}
-/>
-);
+	return (
+			<App
+				token={token}
+				user={user}
+				X_API_KEY={X_API_KEY}
+				API_BASE_URL={API_BASE_URL}
+				type={"RequestWidget"}
+				padding={padding}
+			/>
+	);
 };
 
 export default Component;
@@ -305,22 +302,19 @@ export default Component;
 # Use this dependencies & devDependencies in your react vite code
 
 ```
-
 "dependencies": {
-"react": "^18.3.1",
-"react-dom": "^18.3.1",
-"html2canvas": "^1.4.1",
-"jspdf": "^2.5.2",
-"jspdf-autotable": "^3.8.4",
-"react-csv": "^2.2.2",
-"react-grid-layout": "^1.5.0",
-"react-icons": "^5.3.0",
-"react-loader-spinner": "^6.1.6",
-"react-toastify": "^10.0.5",
-"sass": "^1.77.6",
-"sweetalert2": "^11.14.5"
-},
-
-```
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"html2canvas": "^1.4.1",
+		"jspdf": "^2.5.2",
+		"jspdf-autotable": "^3.8.4",
+		"react-csv": "^2.2.2",
+		"react-grid-layout": "^1.5.0",
+		"react-icons": "^5.3.0",
+		"react-loader-spinner": "^6.1.6",
+		"react-toastify": "^10.0.5",
+		"sass": "^1.77.6",
+		"sweetalert2": "^11.14.5"
+	},
 
 ```
