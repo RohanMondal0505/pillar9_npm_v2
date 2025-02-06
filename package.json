@@ -1,6 +1,6 @@
 {
 	"name": "pillar9_user_package",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Dashboard",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
