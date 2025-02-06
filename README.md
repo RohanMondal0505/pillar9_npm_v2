@@ -1,38 +1,35 @@
-
 # [Demo Website](https://pillar9-npm-demo.netlify.app/)
 
 ## Custom Widget
+
 ```bash
 //your custom components
 const CustomWidget1 = () => {
-	return (
-		<div>
-			<h1>Lorem ipsum dolor sit amet.</h1>
-			<h2>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsa
-				nihil labore.
-			</h2>
-			<button>Press Me</button>
-		</div>
-	);
+ return (
+  <div>
+   <h1>Lorem ipsum dolor sit amet.</h1>
+   <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem neque vel voluptatibus cum accusamus? Nulla ullam rem ipsanihil labore.</h2>
+   <button>Press Me</button>
+  </div>
+ );
 };
 const CustomWidget2 = () => {
-	return (
-		<div>
-			<button>Press Me</button>
-			<button>Click Me</button>
-			<button>Test</button>
-		</div>
-	);
+ return (
+  <div>
+   <button>Press Me</button>
+   <button>Click Me</button>
+   <button>Test</button>
+  </div>
+ );
 };
 const CustomWidget3 = () => {
-	return (
-		<div>
-			<h1>Lorem ipsum dolor sit amet.</h1>
-			<h2>widget 3</h2>
-			<button>Press Me</button>
-		</div>
-	);
+ return (
+  <div>
+   <h1>Lorem ipsum dolor sit amet.</h1>
+   <h2>widget 3</h2>
+   <button>Press Me</button>
+  </div>
+ );
 };
 const CustomWidget4 = () => {
 	return (
@@ -191,6 +188,7 @@ const Component = () => {
 
 export default Component;
 ```
+
 # -----------------------------------
 
 ## Import like this & use for dashboard
