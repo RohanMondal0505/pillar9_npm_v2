@@ -216,7 +216,6 @@ const Component = () => {
 	return (
 			<App
 				type={"CustomDashboard"}
-				padding={padding}
 				customWidget={customWidget}
 				handleSaveLayout={handleSaveLayout}
 				title={title}
