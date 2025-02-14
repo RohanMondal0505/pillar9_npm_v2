@@ -7,7 +7,7 @@ import styles from "./Dashboard.module.scss";
 import FullScreenPopup from "./FullScreenPopup";
 import Widgets from "./Widgets";
 
-const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title }) => {
+const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title, buttonItems }) => {
 	const [layout, setLayout] = useState(customWidget?.layout);
 	const [dashboardData, setDashboardData] = useState(customWidget);
 	const [showUpdateButton, setShowUpdateButton] = useState(false); //for show save layout button
@@ -137,8 +137,11 @@ const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title })
 	const [openInFullScreen, setOpenInFullScreen] = useState(false);
 	const [selectedWidget, setSelectedWidget] = useState(null);
 
+	const [clickedHeader, setClickedHeader] = useState({});
+
 	const handleOpenFullScreen = (widgetComponent) => {
-		setSelectedWidget(() => widgetComponent);
+		setSelectedWidget(() => widgetComponent?.component);
+		setClickedHeader(widgetComponent?.headerItems);
 		setOpenInFullScreen(true);
 	};
 
@@ -148,32 +151,22 @@ const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title })
 
 	return (
 		<>
-			{openInFullScreen && <FullScreenPopup {...{ setOpenInFullScreen, customStyle }} SelectedWidget={selectedWidget} />}
-			<div
-				// style={{ padding: padding }}
-				style={customStyle?.dashboard}
-				className={`${styles.Dashboard} ${customStyle.dashboardClass ? customStyle.dashboardClass : ""}`}
-			>
+			{openInFullScreen && (
+				<FullScreenPopup {...{ setOpenInFullScreen, customStyle }} SelectedWidget={selectedWidget} CustomHeader={clickedHeader} />
+			)}
+			<div style={customStyle?.dashboard} className={`${styles.Dashboard} ${customStyle.dashboardClass ? customStyle.dashboardClass : ""}`}>
 				<div className={styles.Top}>
 					<h2 style={customStyle?.title} className={`${customStyle.titleClass ? customStyle.titleClass : ""}`}>
 						{title}
 					</h2>
 					<div className={styles.Buttons}>
-						{!editable ? (
+						{!editable && !showUpdateButton && (
 							<button
 								onClick={() => setEditable(true)}
 								style={customStyle?.manageButton}
 								className={`${customStyle.manageButtonClass ? customStyle.manageButtonClass : ""}`}
 							>
-								Manage Widgets
-							</button>
-						) : (
-							<button
-								onClick={handleCancel}
-								style={customStyle?.cancelButton}
-								className={`${customStyle.cancelButtonClass ? customStyle.cancelButtonClass : ""}`}
-							>
-								Cancel
+								{buttonItems?.manageWidget?.item || "Manage Widgets"}
 							</button>
 						)}
 
@@ -184,9 +177,19 @@ const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title })
 									style={customStyle?.cancelButton}
 									className={`${customStyle.saveButtonClass ? customStyle.saveButtonClass : ""}`}
 								>
-									Save Layout
+									{buttonItems?.saveButton?.item || "Save Layout"}
 								</button>
 							</>
+						)}
+
+						{(showUpdateButton || editable) && (
+							<button
+								onClick={handleCancel}
+								style={customStyle?.cancelButton}
+								className={`${customStyle.cancelButtonClass ? customStyle.cancelButtonClass : ""}`}
+							>
+								{buttonItems?.cancelButton?.item || "Cancel"}
+							</button>
 						)}
 					</div>
 				</div>
@@ -241,7 +244,8 @@ const CustomDashboard = ({ customWidget, handleSaveLayout, customStyle, title })
 											item={widget}
 											index={i}
 											onWidgetStateChange={handleWidgetStateChange}
-											CustomWidget={widget.component}
+											CustomHeader={widget?.headerItems}
+											clickedWidget={widget}
 											handleOpenFullScreen={handleOpenFullScreen}
 											customStyle={customStyle}
 										/>

@@ -30,8 +30,8 @@
 				border-radius: 0.5rem;
 				background: var(--Ellipse-30, #e6d366);
 				display: inline-flex;
-				height: 3.5rem;
-				padding: 0.75rem 2.625rem;
+				height: auto;
+				padding: 0.975rem 2.625rem;
 				justify-content: center;
 				align-items: center;
 				gap: 0.625rem;
@@ -121,6 +121,12 @@
 				align-items: center;
 				justify-content: space-between;
 				border-bottom: 1px solid rgba(49, 51, 51, 0.151);
+				gap: 2rem;
+
+				.Left {
+					flex: 1;
+					height: 100%;
+				}
 
 				.Right {
 					display: flex;

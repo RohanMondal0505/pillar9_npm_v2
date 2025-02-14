@@ -1,7 +1,8 @@
 import * as React from "react";
 import styles from "./FullScreenPopup.module.scss";
 
-const FullScreenPopup = ({ setOpenInFullScreen, SelectedWidget, customStyle }) => {
+const FullScreenPopup = ({ setOpenInFullScreen, SelectedWidget, customStyle, CustomHeader }) => {
+	const closeFullScreenMenu = CustomHeader?.existingMenu?.find((menu) => menu.name === "CloseFullScreen");
 	return (
 		<div className={styles.FullScreenPopup}>
 			<div
@@ -10,7 +11,7 @@ const FullScreenPopup = ({ setOpenInFullScreen, SelectedWidget, customStyle }) =
 			>
 				<div className={styles.Top}>
 					{/* {isFullScreen?.name} */}
-					<p onClick={() => setOpenInFullScreen(false)}>Close Full Screen</p>
+					<p onClick={() => setOpenInFullScreen(false)}>{closeFullScreenMenu?.item || "Close Full Screen"}</p>
 				</div>
 
 				<div className={styles.Contents}>

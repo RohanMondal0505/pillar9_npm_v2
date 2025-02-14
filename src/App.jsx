@@ -27,6 +27,7 @@ const App = ({
 	customStyle,
 	title,
 	handleSaveLayout,
+	buttonItems,
 }) => {
 	const [isLoadingPopup, setIsLoadingPopup] = useState(false);
 	const [isFullScreen, setIsFullScreen] = useState(false);
@@ -67,6 +68,7 @@ const App = ({
 								handleSaveLayout,
 								customStyle,
 								title,
+								buttonItems,
 							}}
 						/>
 					</div>
