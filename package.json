@@ -1,12 +1,14 @@
 {
 	"name": "pillar9_user_package",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Dashboard",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"type": "module",
 	"scripts": {
-		"rollup": "npx rollup -c"
+		"rollup": "npx rollup -c",
+		"publish": "npm publish",
+		"unpublish": "npm unpublish pillar9_user_package@1.0.0"
 	},
 	"repository": {
 		"type": "git",
