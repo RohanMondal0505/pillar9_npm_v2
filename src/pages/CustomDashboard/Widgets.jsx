@@ -45,12 +45,15 @@ const Widgets = ({ item, index, onWidgetStateChange, clickedWidget, handleOpenFu
 		<>
 			{item?.showHeader && (
 				<div
-					className={`${styles.ActionButtons} ${customStyle.widgetTitleClass ? customStyle.widgetTitleClass : ""} `}
-					style={customStyle?.widgetTitle}
+					className={`${styles.ActionButtons} ${customStyle.headerClass ? customStyle.headerClass : ""} `}
 					onClick={() => setOpenLockMenu(false)}
 					onMouseDown={handleMouseDown}
-				>
-					<div className={`${styles.Left} dragHandle`}>{item?.name}</div>
+					style={customStyle?.headerStyle}>
+					<div
+						className={`${styles.Left} ${customStyle.widgetTitleClass ? customStyle.widgetTitleClass : ""}  dragHandle`}
+						style={customStyle?.widgetTitle}>
+						{item?.name}
+					</div>
 					<div className={`${styles.Right}`}>
 						{CustomHeader?.additionalMenu?.map((menu, k) => (
 							<span onClick={menu.onClick} key={k}>
@@ -84,8 +87,7 @@ const Widgets = ({ item, index, onWidgetStateChange, clickedWidget, handleOpenFu
 											onClick={() => {
 												handleLockUnlock(false);
 												setOpenLockMenu(false);
-											}}
-										>
+											}}>
 											{UnlockMenu?.item || (
 												<>
 													<BiSolidLockOpen />
@@ -98,8 +100,7 @@ const Widgets = ({ item, index, onWidgetStateChange, clickedWidget, handleOpenFu
 											onClick={() => {
 												handleLockUnlock(true);
 												setOpenLockMenu(false);
-											}}
-										>
+											}}>
 											{LockMenu?.item || (
 												<>
 													<BsLockFill />
@@ -118,8 +119,7 @@ const Widgets = ({ item, index, onWidgetStateChange, clickedWidget, handleOpenFu
 			<div
 				className={`${styles.Content} ${isCollapsed ? styles.Collapse : ""} ${item?.showHeader ? "" : "dragHandle"}`}
 				onClick={() => setOpenLockMenu(false)}
-				onMouseDown={handleMouseDown}
-			>
+				onMouseDown={handleMouseDown}>
 				{clickedWidget && <clickedWidget.component />}
 			</div>
 		</>

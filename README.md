@@ -224,32 +224,38 @@ const customWidget = {
 	],
 };
 
-const customStyle = {
-	title: {
-		color: "blue",
-	},
-	titleClass: "title",
-	cancelButton: {},
-	cancelButtonClass: "YourClassName",
-	saveButton: {},
-	saveButtonClass: "YourClassName",
-	manageButton: {},
-	manageButtonClass: "YourClassName",
-	dashboard: {
-		backgroundColor: "#fff",
-		padding: "2rem",
-	},
-	dashboardClass: "dashboardClass",
-	widgetTitle: {
-		fontSize: "1.2rem",
-		color: "#444",
-	},
-	widgetTitleClass: "WidgetClassName",
-	fullScreenStyle: {
-		backgroundColor: "#fff",
-	},
-	fullScreenClassName: "fullScreenClassName",
-};
+	const customStyle = {
+		title: {
+			color: "blue",
+		},
+		titleClass: "YourClassName",
+		cancelButton: {},
+		cancelButtonClass: "YourClassName",
+		saveButton: {},
+		saveButtonClass: "YourClassName",
+		manageButton: {},
+		manageButtonClass: "YourClassName",
+		dashboard: {
+			backgroundColor: "#fff",
+			padding: "2rem",
+		},
+		dashboardClass: "dashboardClass",
+		widgetTitle: {
+			fontSize: "1.2rem",
+			color: "#444",
+		},
+		widgetTitleClass: "WidgetTitleClassName",
+		headerStyle: {
+			backgroundColor: "skyblue",
+			color: "#000",
+		},
+		headerClass: "headerClass",
+		fullScreenStyle: {
+			backgroundColor: "#fff",
+		},
+		fullScreenClassName: "fullScreenClassName",
+	};
+	
 const title = "Your Custom Title";
 
 const buttonItems = {
